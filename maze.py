@@ -17,6 +17,7 @@ class Maze:
         self.draw_map()
 
         print("hey")
+        print("there")
 
     def draw_maze(self, f):
         copy = self.__rect.copy()
