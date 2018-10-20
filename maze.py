@@ -15,10 +15,6 @@ class Maze:
         self.__rect.top = 60
 
         self.draw_map()
-        
-        print("hello")
-        print("success!")
-        testing
 
     def draw_maze(self, f):
         copy = self.__rect.copy()
