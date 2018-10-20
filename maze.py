@@ -16,8 +16,6 @@ class Maze:
 
         self.draw_map()
 
-        self.__rect.top = 70
-
     def draw_maze(self, f):
         copy = self.__rect.copy()
         while True:
