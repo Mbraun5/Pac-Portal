@@ -20,6 +20,7 @@ def run_game():
     image_lib = gF.import_image_library()
     pacman = p.PacMan(image_lib, screen, settings)
     maze = m.Maze(image_lib, screen, settings, pacman)
+    pacman.set_map(maze.get_map(), maze.rowIndex, maze.columnIndex)
 
     clock = pygame.time.Clock()
     timer = 1                       # Marks 1 second

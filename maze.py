@@ -2,6 +2,7 @@ import pygame
 import sys
 import traceback
 import powerpill
+import time
 
 
 class Maze:
@@ -18,12 +19,12 @@ class Maze:
 
         self.image_lib = image_lib
         self.map = []
+        self.rowIndex = None
+        self.columnIndex = None
+
         self.pills = []
         self.parse_file()
         self.draw_maze()
-
-        self.rowIndex = 0
-        self.columnIndex = 0
 
         self.print_map()
 
@@ -78,6 +79,9 @@ class Maze:
             pill.blit()
         pygame.display.flip()
 
+    def get_map(self):
+        return self.map
+
     def print_map(self):
         for obj in self.map:
             for item in obj:
@@ -86,3 +90,4 @@ class Maze:
                 elif isinstance(item, str):
                     print(item, end="")
             print()
+        print(self.rowIndex, self.columnIndex)
