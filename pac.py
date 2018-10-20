@@ -1,5 +1,4 @@
 import pygame
-import time
 
 
 class PacMan:
@@ -22,7 +21,7 @@ class PacMan:
         self.direction = "right"
         self.moving = True
         #   Tracks whether or not Pacman needs to change direction and at what x or y coordinate it needs to change.
-        self.updateFlag = [False, "Direction", 0, 0]
+        self.updateFlag = [False, "Direction", 999]
         self.mapCounter = 0
 
         self.travelDistance = 60
@@ -65,31 +64,127 @@ class PacMan:
                     self.map[self.row_index][self.column_index] = 'P'
                     self.mapCounter = 0
                 self.travelDistance -= abs(self.speed)
+            if self.updateFlag[0]:
+                self.updateFlag[2] -= abs(self.speed)
         if self.travelDistance <= 0:
             self.moving = False
-        self.print_map()
+        if self.updateFlag[0]:
+            if self.updateFlag[2] <= 0:
+                if self.updateFlag[1] == "left":
+                    self.go_left()
+                elif self.updateFlag[1] == "right":
+                    self.go_right()
+                elif self.updateFlag[1] == "up":
+                    self.go_up()
+                elif self.updateFlag[1] == "down":
+                    self.go_down()
+                self.updateFlag[0] = False
+        # self.print_map()
 
-
-
-    ''' LEFT OFF HERE'''
     def check_move(self, direction):
+        while self.mapCounter != 0:
+            self.update()
+            self.blit()
+            pygame.display.flip()
         if direction == "left":
             if isinstance(self.map[self.row_index][self.column_index - 1], pygame.Rect) or \
                     isinstance(self.map[self.row_index + 1][self.column_index - 1], pygame.Rect) or \
                     isinstance(self.map[self.row_index + 2][self.column_index - 1], pygame.Rect):
                 if self.direction == "up":
                     count = 2
+                    while isinstance(self.map[self.row_index + count][self.column_index - 1], str):
+                        count -= 1
+                    while isinstance(self.map[self.row_index + count][self.column_index - 1], pygame.Rect):
+                        count -= 1
+                    distance = abs(self.rect.bottom - self.map[self.row_index + count + 1][self.column_index - 1].top)
+                    self.updateFlag = [True, "left", distance]
+                elif self.direction == "down":
+                    count = 0
+                    while isinstance(self.map[self.row_index + count][self.column_index - 1], str):
+                        count += 1
                     while isinstance(self.map[self.row_index + count][self.column_index - 1], pygame.Rect):
                         count += 1
-                    self.updateFlag = [True, "left", ]
+                    distance = abs(self.map[self.row_index + count - 1][self.column_index - 1].bottom - self.rect.top)
+                    self.updateFlag = [True, "left", distance]
+            else:
+                self.go_left()
         elif direction == "right":
-            pass
+            if isinstance(self.map[self.row_index][self.column_index + 3], pygame.Rect) or \
+                    isinstance(self.map[self.row_index + 1][self.column_index + 3], pygame.Rect) or \
+                    isinstance(self.map[self.row_index + 2][self.column_index + 3], pygame.Rect):
+                if self.direction == "up":
+                    count = 2
+                    while isinstance(self.map[self.row_index + count][self.column_index + 3], str):
+                        count -= 1
+                    while isinstance(self.map[self.row_index + count][self.column_index + 3], pygame.Rect):
+                        count -= 1
+                    distance = abs(self.rect.bottom - self.map[self.row_index + count + 1][self.column_index + 3].top)
+                    self.updateFlag = [True, "right", distance]
+                elif self.direction == "down":
+                    count = 0
+                    while isinstance(self.map[self.row_index + count][self.column_index + 3], str):
+                        count += 1
+                    while isinstance(self.map[self.row_index + count][self.column_index + 3], pygame.Rect):
+                        count += 1
+                    distance = self.map[self.row_index + count - 1][self.column_index + 3].bottom - self.rect.top
+                    self.updateFlag = [True, "right", distance]
+            else:
+                self.go_right()
         elif direction == "up":
-            pass
+            if isinstance(self.map[self.row_index - 1][self.column_index], pygame.Rect) or \
+                    isinstance(self.map[self.row_index - 1][self.column_index + 1], pygame.Rect) or \
+                    isinstance(self.map[self.row_index - 1][self.column_index + 2], pygame.Rect):
+                if self.direction == "left":
+                    count = 2
+                    while isinstance(self.map[self.row_index - 1][self.column_index + count], str):
+                        count -= 1
+                    while isinstance(self.map[self.row_index - 1][self.column_index + count], pygame.Rect):
+                        count -= 1
+                    distance = abs(self.rect.right - self.map[self.row_index - 1][self.column_index + count + 1].left)
+                    self.updateFlag = [True, "up", distance]
+                elif self.direction == "right":
+                    count = 0
+                    while isinstance(self.map[self.row_index - 1][self.column_index + count], str):
+                        count += 1
+                        if self.column_index + count > len(self.map[self.row_index - 1]) - 1:
+                            return
+                    while isinstance(self.map[self.row_index - 1][self.column_index + count], pygame.Rect):
+                        count += 1
+                        if self.column_index + count > len(self.map[self.row_index - 1]) - 1:
+                            return
+                    distance = self.map[self.row_index - 1][self.column_index + count - 1].right - self.rect.left
+                    self.updateFlag = [True, "up", distance]
+            else:
+                self.go_up()
         elif direction == "down":
-            pass
+            if isinstance(self.map[self.row_index + 3][self.column_index], pygame.Rect) or \
+                    isinstance(self.map[self.row_index + 3][self.column_index + 1], pygame.Rect) or \
+                    isinstance(self.map[self.row_index + 3][self.column_index + 2], pygame.Rect):
+                if self.direction == "left":
+                    count = 2
+                    while isinstance(self.map[self.row_index + 3][self.column_index + count], str):
+                        count -= 1
+                    while isinstance(self.map[self.row_index + 3][self.column_index + count], pygame.Rect):
+                        count -= 1
+                    distance = abs(self.rect.right - self.map[self.row_index + 3][self.column_index + count + 1].left)
+                    self.updateFlag = [True, "down", distance]
+                elif self.direction == "right":
+                    count = 0
+                    while isinstance(self.map[self.row_index + 3][self.column_index + count], str):
+                        count += 1
+                        if self.column_index + count > len(self.map[self.row_index+3]) - 1:
+                            return
+                    while isinstance(self.map[self.row_index + 3][self.column_index + count], pygame.Rect):
+                        count += 1
+                        if self.column_index + count > len(self.map[self.row_index+3]) - 1:
+                            return
+                    distance = abs(self.map[self.row_index + 3][self.column_index + count - 1].right - self.rect.left)
+                    self.updateFlag = [True, "down", distance]
+            else:
+                self.go_down()
 
     def go_left(self):
+        self.mapCounter = 0
         self.moving = True
         if self.direction == "right":
             for index, image in enumerate(self.images):
@@ -110,6 +205,7 @@ class PacMan:
         self.travelDistance = self.rect.left - self.map[self.row_index][self.column_index - count].right
 
     def go_right(self):
+        self.mapCounter = 0
         self.moving = True
         if self.direction == "left":
             for index, image in enumerate(self.images):
@@ -130,6 +226,7 @@ class PacMan:
         self.travelDistance = self.map[self.row_index][self.column_index + count].left - self.rect.right
 
     def go_up(self):
+        self.mapCounter = 0
         self.moving = True
         if self.direction == "down":
             for index, image in enumerate(self.images):
@@ -150,6 +247,7 @@ class PacMan:
         self.travelDistance = self.rect.top - self.map[self.row_index - count][self.column_index].bottom
 
     def go_down(self):
+        self.mapCounter = 0
         self.moving = True
         if self.direction == "up":
             for index, image in enumerate(self.images):
