@@ -12,6 +12,13 @@ class Settings:
         self.__squareRect = 15
         self.__squareRectColor = (60, 30, 255)
 
+        #   Pacman Settings
+        self.pacIndexes = [0, 1, 2]
+        self.pacSpeed = 3
+
+        #   Pill Settings
+        self.smallPillIndex = 4
+
     def get_bg_color(self):
         return self.__bgColor
 

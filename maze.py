@@ -1,30 +1,35 @@
 import pygame
 import sys
 import traceback
+import powerpill
 
 
 class Maze:
-    def __init__(self, screen, settings):
+    def __init__(self, image_lib, screen, settings, pacman):
         self.__screen = screen
         self.__screenRect = screen.get_rect()
         self.__settings = settings
+        self.pacman = pacman
 
         self.__rect = pygame.Rect(0, 0, self.__settings.get_square_rect(), self.__settings.get_square_rect())
         self.__rectColor = settings.get_square_rect_color()
         self.__rect.x = 215
         self.__rect.top = 60
 
-        self.image_lib = [pygame.image.load('Images/Pacmang.png'), pygame.image.load('Images/Pac1.png'), pygame.image.load('Images/Pac3.png'), pygame.image.load('Images/Tile.png')]
+        self.image_lib = image_lib
         self.map = []
+        self.pills = []
         self.parse_file()
         self.draw_maze()
 
         self.rowIndex = 0
         self.columnIndex = 0
 
+        self.print_map()
+
     def parse_file(self):
         try:
-            with open('pellet.txt', 'r') as f:
+            with open('maze.txt', 'r') as f:
                 map_row = []
                 copy = self.__rect.copy()
                 while True:
@@ -37,16 +42,21 @@ class Maze:
                         copy.left = self.__rect.left
                         self.map.append(map_row)
                         map_row = []
-                    elif flag == "." or flag == 'o':
+                    elif flag == ".":
                         copy.left = copy.right
                         map_row.append(flag)
+                    elif flag == 'o':
+                        x = copy.centerx
+                        y = copy.centery
+                        new_pill = powerpill.SmallPowerPill(self.image_lib, self.__screen, self.__settings, x, y)
+                        self.pills.append(new_pill)
+                        map_row.append(flag)
+                        copy.left = copy.right
                     elif flag == "P":
-                        self.newRect = self.image_lib[0].get_rect()
-                        self.newRect.left = copy.right
-                        self.newRect.y = copy.y
+                        self.pacman.set_rect(copy.x, copy.y)
                         self.rowIndex = len(self.map)
                         self.columnIndex = len(map_row)
-                        map_row.append(self.newRect)
+                        map_row.append(flag)
                         copy.left = copy.right
                     elif flag == "x":
                         map_row.append(copy.copy())
@@ -64,6 +74,15 @@ class Maze:
             for item in obj:
                 if isinstance(item, pygame.Rect):
                     self.__screen.blit(self.image_lib[3], item)
-                    #pygame.draw.rect(self.__screen, self.__rectColor, item)
-        self.__screen.blit(self.image_lib[0], self.newRect)
+        for pill in self.pills:
+            pill.blit()
         pygame.display.flip()
+
+    def print_map(self):
+        for obj in self.map:
+            for item in obj:
+                if isinstance(item, pygame.Rect):
+                    print('x', end="")
+                elif isinstance(item, str):
+                    print(item, end="")
+            print()

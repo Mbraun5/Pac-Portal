@@ -2,8 +2,8 @@ import pygame
 import os
 import settings as s
 import maze as m
-import math
-import time
+import gameFunctions as gF
+import pac as p
 
 
 def run_game():
@@ -11,16 +11,26 @@ def run_game():
     os.environ['SDL_VIDEO_WINDOW_POS'] = '60, 35'
     pygame.init()
 
+    #   Initial Set-up
     settings = s.Settings()
     screen = pygame.display.set_mode((settings.get_screen_width(), settings.get_screen_height()))
     pygame.display.set_caption(settings.get_game_title())
-
     screen.fill(settings.get_bg_color())
-    maze = m.Maze(screen, settings)
-    image_lib = [pygame.image.load('Images/Pacman.png'), pygame.image.load('Images/Pac1.png'), pygame.image.load('Images/Pac3.png')]
 
+    image_lib = gF.import_image_library()
+    pacman = p.PacMan(image_lib, screen, settings)
+    maze = m.Maze(image_lib, screen, settings, pacman)
+
+    clock = pygame.time.Clock()
+    timer = 1                       # Marks 1 second
+    delta_t = 0                     # Delta to subtract from time
     while True:
-        pass
+        gF.check_events(pacman)
+        delta_t, timer = gF.check_time(clock, delta_t, timer, pacman)
+
+        pacman.update()
+        pacman.blit()
+        pygame.display.flip()
 
 
 run_game()
