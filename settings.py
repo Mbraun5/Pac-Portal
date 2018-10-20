@@ -2,14 +2,14 @@ class Settings:
     def __init__(self):
         #   Screen Settings
         self.__screenWidth = 1200
-        self.__screenHeight = 1000
+        self.__screenHeight = 1200
         self.__bgColor = (0, 0, 0)
 
         #   Game Settings
         self.__gameTitle = "Pacman Portal"
 
         #   Maze Settings
-        self.__squareRect = 17
+        self.__squareRect = 15
         self.__squareRectColor = (60, 30, 255)
 
     def get_bg_color(self):
