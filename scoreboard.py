@@ -35,11 +35,26 @@ class ScoreBoard:
         self.highScoreValueRect.centerx = self.highScoreTextRect.centerx
         self.highScoreValueRect.top = self.highScoreTextRect.bottom
 
+        #   Lives Image
+        self.numberOfLives = 2
+        self.livesTextImage = self.font.render("LIVES:", True, self.settings.whiteFont, self.settings.get_bg_color())
+        self.livesTextRect = self.livesTextImage.get_rect()
+        self.livesTextRect.left = self.currentScoreRect.right + 180
+        self.livesTextRect.bottom = self.currentScoreRect.bottom
+
+        #   Pac Image for lives
+        self.livesImage = pygame.transform.flip(maze.image_lib[self.settings.pacIndexes[1]], True, False)
+        self.livesRect = self.livesImage.get_rect()
+        self.livesRect.top = self.livesTextRect.top
+        self.livesRect.left = self.livesTextRect.right + 5
+
     def blit(self):
         self.screen.blit(self.scoreImage, self.scoreRect)
         self.screen.blit(self.currentScoreImage, self.currentScoreRect)
         self.screen.blit(self.highScoreTextImage, self.highScoreTextRect)
         self.screen.blit(self.highScoreValueImage, self.highScoreValueRect)
+        self.screen.blit(self.livesTextImage, self.livesTextRect)
+        self.screen.blit(self.livesImage, self.livesRect)
 
     @staticmethod
     def get_high_score():
