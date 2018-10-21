@@ -4,12 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/pacman.py" line="5" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a881536c-6718-476e-9d83-49f4f155aedc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameFunctions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac.py" beforeDir="false" afterPath="$PROJECT_DIR$/pac.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman.py" beforeDir="false" afterPath="$PROJECT_DIR$/pacman.py" afterDir="false" />
-    </list>
+    <list default="true" id="a881536c-6718-476e-9d83-49f4f155aedc" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +223,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="294" />
     <option name="y" value="6" />
     <option name="width" value="1400" />
