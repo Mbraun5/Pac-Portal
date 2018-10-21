@@ -4,7 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/pacman.py" line="5" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a881536c-6718-476e-9d83-49f4f155aedc" name="Default Changelist" comment="" />
+    <list default="true" id="a881536c-6718-476e-9d83-49f4f155aedc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drawing.svg" beforeDir="false" afterPath="$PROJECT_DIR$/drawing.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameFunctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacman.py" beforeDir="false" afterPath="$PROJECT_DIR$/pacman.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,20 +56,20 @@
     <session id="1348960177">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.2" value="2" />
-          <entry key="project.open.time.3" value="3" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.3" value="4" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="14918" />
+          <entry key="py" value="14920" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="14918" />
+          <entry key="Python" value="14920" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -98,28 +103,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pacman.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gameFunctions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="95" selection-start-line="7" selection-start-column="95" selection-end-line="7" selection-end-column="95" />
+            <state relative-caret-position="595">
+              <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1540079651797" expanded="true" signature="54:59" ph="..." />
-                <marker date="1540079651797" expanded="true" signature="769:774" ph="..." />
-                <marker date="1540079651797" expanded="true" signature="1091:1096" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gameFunctions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="95" selection-start-line="7" selection-start-column="95" selection-end-line="7" selection-end-column="95" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <marker date="1540104695520" expanded="true" signature="54:59" ph="..." />
+                <marker date="1540104695520" expanded="true" signature="769:774" ph="..." />
+                <marker date="1540104695520" expanded="true" signature="1091:1096" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
@@ -134,7 +142,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/maze.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
+            <state relative-caret-position="323">
               <caret line="23" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -172,7 +180,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pac.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1315">
+            <state relative-caret-position="2584">
               <caret line="152" column="86" selection-start-line="152" selection-start-column="86" selection-end-line="152" selection-end-column="86" />
               <folding>
                 <marker date="1540073764731" expanded="true" signature="29:34" ph="..." />
@@ -218,8 +226,8 @@
         <option value="$PROJECT_DIR$/settings.py" />
         <option value="$PROJECT_DIR$/maze.py" />
         <option value="$PROJECT_DIR$/pac.py" />
-        <option value="$PROJECT_DIR$/pacman.py" />
         <option value="$PROJECT_DIR$/gameFunctions.py" />
+        <option value="$PROJECT_DIR$/pacman.py" />
       </list>
     </option>
   </component>
@@ -347,21 +355,11 @@
     <entry file="file://$PROJECT_DIR$/Pacman Other stuff.txt" />
     <entry file="file://$PROJECT_DIR$/maze.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="323">
           <caret line="23" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <marker date="1540037312734" expanded="true" signature="2855:2885" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <marker date="1540033854071" expanded="true" signature="525:534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -389,7 +387,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pac.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1315">
+        <state relative-caret-position="2584">
           <caret line="152" column="86" selection-start-line="152" selection-start-column="86" selection-end-line="152" selection-end-column="86" />
           <folding>
             <marker date="1540073764731" expanded="true" signature="29:34" ph="..." />
@@ -400,8 +398,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pacman.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+        <state relative-caret-position="595">
+          <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -411,9 +412,19 @@
           <caret line="7" column="95" selection-start-line="7" selection-start-column="95" selection-end-line="7" selection-end-column="95" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1540079651797" expanded="true" signature="54:59" ph="..." />
-            <marker date="1540079651797" expanded="true" signature="769:774" ph="..." />
-            <marker date="1540079651797" expanded="true" signature="1091:1096" ph="..." />
+            <marker date="1540104695520" expanded="true" signature="54:59" ph="..." />
+            <marker date="1540104695520" expanded="true" signature="769:774" ph="..." />
+            <marker date="1540104695520" expanded="true" signature="1091:1096" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <folding>
+            <marker date="1540033854071" expanded="true" signature="525:534" ph="..." />
           </folding>
         </state>
       </provider>

@@ -22,21 +22,15 @@ def run_game():
     maze = m.Maze(image_lib, screen, settings, pacman)
     pacman.set_map(maze.get_map(), maze.rowIndex, maze.columnIndex)
 
-
-    rect = image_lib[5].get_rect()
-    rect.x = 500
-    rect.y = 500
-
-
     clock = pygame.time.Clock()
     timer = 1                       # Marks 1 second
     delta_t = 0                     # Delta to subtract from time
     while True:
-        screen.blit(image_lib[5], rect)
         gF.check_events(pacman)
         pacman.update()
         delta_t, timer = gF.check_time(clock, delta_t, timer, pacman)
         pacman.blit()
         pygame.display.flip()
+
 
 run_game()

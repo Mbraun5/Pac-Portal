@@ -5,7 +5,7 @@ import sys
 def import_image_library():
     image_lib = [pygame.image.load('Images/Pac1.png'), pygame.image.load('Images/Pac4.png'),
                  pygame.image.load('Images/Pac5.png'), pygame.image.load('Images/Tile.png'),
-                 pygame.image.load('Images/SmallPill.png'), pygame.image.load('Images/BlinkyUp3.png')]
+                 pygame.image.load('Images/SmallPill.png'), pygame.image.load('Images/BlinkyUp1.png')]
     return image_lib
 
 
