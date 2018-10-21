@@ -14,8 +14,8 @@ class Maze:
 
         self.__rect = pygame.Rect(0, 0, self.__settings.get_square_rect(), self.__settings.get_square_rect())
         self.__rectColor = settings.get_square_rect_color()
-        self.__rect.x = 215
-        self.__rect.top = 60
+        self.__rect.x = 200
+        self.__rect.top = 110
 
         self.image_lib = image_lib
         self.map = []

@@ -4,6 +4,7 @@ import settings as s
 import maze as m
 import gameFunctions as gF
 import pac as p
+import scoreboard as sb
 
 
 def run_game():
@@ -20,6 +21,7 @@ def run_game():
     image_lib = gF.import_image_library()
     pacman = p.PacMan(image_lib, screen, settings)
     maze = m.Maze(image_lib, screen, settings, pacman)
+    scoreboard = sb.ScoreBoard(maze, screen, settings)
     pacman.set_map(maze.get_map(), maze.rowIndex, maze.columnIndex)
 
     clock = pygame.time.Clock()
@@ -30,6 +32,7 @@ def run_game():
         pacman.update()
         delta_t, timer = gF.check_time(clock, delta_t, timer, pacman)
         pacman.blit()
+        scoreboard.blit()
         pygame.display.flip()
 
 

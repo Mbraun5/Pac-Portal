@@ -19,6 +19,10 @@ class Settings:
         #   Pill Settings
         self.smallPillIndex = 4
 
+        #   Text Settings
+        self.yellowFont = (255, 255, 0)
+        self.whiteFont = (255, 255, 255)
+
     def get_bg_color(self):
         return self.__bgColor
 
