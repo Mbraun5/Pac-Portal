@@ -22,6 +22,11 @@ class Maze:
         self.rowIndex = None
         self.columnIndex = None
 
+        self.blinkyCoordinates = None
+        self.clydeCoordinates = None
+        self.inkyCoordinates = None
+        self.pinkyCoordinates = None
+
         self.pills = []
         self.largePills = []
         self.parse_file()
@@ -59,6 +64,22 @@ class Maze:
                         y = copy.centery+5
                         new_pill = powerpill.LargePowerPill(self.image_lib, self.__screen, self.__settings, x, y)
                         self.largePills.append(new_pill)
+                        map_row.append(flag)
+                        copy.left = copy.right
+                    elif flag == "b":
+                        self.blinkyCoordinates = [copy.x, copy.y]
+                        map_row.append(flag)
+                        copy.left = copy.right
+                    elif flag == "i":
+                        self.inkyCoordinates = [copy.x, copy.y]
+                        map_row.append(flag)
+                        copy.left = copy.right
+                    elif flag == "p":
+                        self.pinkyCoordinates = [copy.x, copy.y]
+                        map_row.append(flag)
+                        copy.left = copy.right
+                    elif flag == "c":
+                        self.clydeCoordinates = [copy.x, copy.y]
                         map_row.append(flag)
                         copy.left = copy.right
                     elif flag == "P":

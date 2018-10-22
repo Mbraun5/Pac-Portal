@@ -27,6 +27,12 @@ class Settings:
         self.yellowFont = (255, 255, 0)
         self.whiteFont = (255, 255, 255)
 
+        #   Ghost Settings
+        self.BlinkyIndices = [16, 24]
+        self.ClydeIndices = [24, 32]
+        self.InkyIndices = [32, 40]
+        self.PinkyIndices = [40, 48]
+
     def get_bg_color(self):
         return self.__bgColor
 
