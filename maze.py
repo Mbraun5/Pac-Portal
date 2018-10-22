@@ -23,6 +23,7 @@ class Maze:
         self.columnIndex = None
 
         self.pills = []
+        self.largePills = []
         self.parse_file()
         self.draw_maze()
 
@@ -51,6 +52,13 @@ class Maze:
                         y = copy.centery
                         new_pill = powerpill.SmallPowerPill(self.image_lib, self.__screen, self.__settings, x, y)
                         self.pills.append(new_pill)
+                        map_row.append(flag)
+                        copy.left = copy.right
+                    elif flag == 'O':
+                        x = copy.centerx+5
+                        y = copy.centery+5
+                        new_pill = powerpill.LargePowerPill(self.image_lib, self.__screen, self.__settings, x, y)
+                        self.largePills.append(new_pill)
                         map_row.append(flag)
                         copy.left = copy.right
                     elif flag == "P":

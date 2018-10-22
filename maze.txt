@@ -4,7 +4,7 @@ x.o.o.o.o.o.o.o.o.o.o.o.o.xxx.o.o.o.o.o.o.o.o.o.o.o.o.x
 x.........................xxx.........................x
 x.o.xxxxxxx.o.xxxxxxxxx.o.xxx.o.xxxxxxxxx.o.xxxxxxx.o.x
 x...xxxxxxx...xxxxxxxxx...xxx...xxxxxxxxx...xxxxxxx...x
-x.o.xxxxxxx.o.xxxxxxxxx.o.xxx.o.xxxxxxxxx.o.xxxxxxx.o.x
+x.O.xxxxxxx.o.xxxxxxxxx.o.xxx.o.xxxxxxxxx.o.xxxxxxx.O.x
 x...xxxxxxx...xxxxxxxxx...xxx...xxxxxxxxx...xxxxxxx...x
 x.o.xxxxxxx.o.xxxxxxxxx.o.xxx.o.xxxxxxxxx.o.xxxxxxx.o.x
 x.....................................................x
@@ -44,7 +44,7 @@ x.o.xxxxxxx.o.xxxxxxxxx.o.xxx.o.xxxxxxxxx.o.xxxxxxx.o.x
 x...xxxxxxx...xxxxxxxxx...xxx...xxxxxxxxx...xxxxxxx...x
 x.o.xxxxxxx.o.xxxxxxxxx.o.xxx.o.xxxxxxxxx.o.xxxxxxx.o.x
 x.......xxx...............P.................xxx.......x
-x.o.o.o.xxx.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.xxx.o.o.o.x
+x.O.o.o.xxx.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.xxx.o.o.O.x
 x.......xxx.................................xxx.......x
 xxxxx.o.xxx.o.xxx.o.xxxxxxxxxxxxxxx.o.xxx.o.xxx.o.xxxxx
 xxxxx...xxx...xxx...xxxxxxxxxxxxxxx...xxx...xxx...xxxxx

@@ -18,8 +18,12 @@ class Settings:
 
         #   Pill Settings
         self.smallPillIndex = 4
+        self.smallPillValue = 10
+        self.largePillIndices = [5, 16]
+        self.largePillValue = 50
 
         #   Text Settings
+        self.blackFont = (0, 0, 0)
         self.yellowFont = (255, 255, 0)
         self.whiteFont = (255, 255, 255)
 
