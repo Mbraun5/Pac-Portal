@@ -3,29 +3,45 @@ import time
 
 
 class Ghost:
-    def __init__(self, screen, settings):
+    def __init__(self, image_library, screen, settings):
         self.screen = screen
         self.settings = settings
+        self.vulnerable_image_lib = image_library[self.settings.VulnerableIndices[0]: self.settings.VulnerableIndices[1]]
+        self.vulnerableImage = self.vulnerable_image_lib[0]
+        self.vulnerableIndex = 0
         self.index = None
         self.image_lib = None
         self.image = None
         self.rect = None
+        self.vulnerable = False
 
     def blit(self):
-        self.screen.blit(self.image, self.rect)
+        if not self.vulnerable:
+            self.screen.blit(self.image, self.rect)
+        else:
+            self.screen.blit(self.vulnerable_image_lib[self.vulnerableIndex], self.rect)
 
     def change_image(self):
-        if self.index % 2 == 0:
-            self.index += 1
-            self.image = self.image_lib[self.index]
+        if not self.vulnerable:
+            if self.index % 2 == 0:
+                self.index += 1
+                self.image = self.image_lib[self.index]
+            else:
+                self.index -= 1
+                self.image = self.image_lib[self.index]
         else:
-            self.index -= 1
-            self.image = self.image_lib[self.index]
+            if self.vulnerableIndex == 0:
+                self.vulnerableIndex = 1
+            else:
+                self.vulnerableIndex = 0
+
+    def set_vulnerable(self):
+        self.vulnerable = True
 
 
 class Blinky(Ghost):
     def __init__(self, image_library, screen, settings, x, y):
-        super().__init__(screen, settings)
+        super().__init__(image_library, screen, settings)
         self.image_lib = image_library[settings.BlinkyIndices[0]: settings.BlinkyIndices[1]]
         self.index = 4                                  # Ghosts start game looking up.
         self.image = self.image_lib[self.index]
@@ -36,7 +52,7 @@ class Blinky(Ghost):
 
 class Clyde(Ghost):
     def __init__(self, image_library, screen, settings, x, y):
-        super().__init__(screen, settings)
+        super().__init__(image_library, screen, settings)
         self.image_lib = image_library[settings.ClydeIndices[0]: settings.ClydeIndices[1]]
         self.index = 4                                  # Ghosts start game looking up.
         self.image = self.image_lib[self.index]
@@ -47,7 +63,7 @@ class Clyde(Ghost):
 
 class Inky(Ghost):
     def __init__(self, image_library, screen, settings, x, y):
-        super().__init__(screen, settings)
+        super().__init__(image_library, screen, settings)
         self.image_lib = image_library[settings.InkyIndices[0]: settings.InkyIndices[1]]
         self.index = 4                                  # Ghosts start game looking up.
         self.image = self.image_lib[self.index]
@@ -58,7 +74,7 @@ class Inky(Ghost):
 
 class Pinky(Ghost):
     def __init__(self, image_library, screen, settings, x, y):
-        super().__init__(screen, settings)
+        super().__init__(image_library, screen, settings)
         self.image_lib = image_library[settings.PinkyIndices[0]: settings.PinkyIndices[1]]
         self.index = 4                                  # Ghosts start game looking up.
         self.image = self.image_lib[self.index]
