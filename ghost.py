@@ -1,5 +1,6 @@
 import pygame
 import time
+print("hahaha")
 
 
 class Ghost:
