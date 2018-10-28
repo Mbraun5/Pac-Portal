@@ -32,6 +32,7 @@ class Settings:
         self.ClydeIndices = [24, 32]
         self.InkyIndices = [32, 40]
         self.PinkyIndices = [40, 48]
+        self.VulnerableIndices = [48, 52]
 
     def get_bg_color(self):
         return self.__bgColor
