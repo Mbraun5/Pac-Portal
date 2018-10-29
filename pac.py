@@ -6,11 +6,15 @@ class PacMan:
         self.screen = screen
         self.settings = settings
         self.images = []
+        self.deathImages = image_library[self.settings.deathIndices[0]: self.settings.deathIndices[1]]
         for index in self.settings.pacIndexes:
             self.images.append(image_library[index])
         self.map = None
+        self.mapOrig = None
         self.row_index = None
         self.column_index = None
+        self.row_index_orig = None
+        self.column_index_orig = None
 
         self.blitCounter = 0
         self.blitIndex = 1
@@ -41,6 +45,22 @@ class PacMan:
         self.indexInc = 1
         self.blitIndex = 1
         self.blitCounter = 0
+        self.map = self.mapOrig
+        self.row_index = self.row_index_orig
+        self.column_index = self.column_index_orig
+        self.go_left()
+
+    def die(self):
+        self.screen.blit(self.deathImages[0], self.rect)
+        pygame.display.flip()
+        counter = 1
+        for i in range(1, 3000000):
+            if i % 500000 == 0:
+                self.screen.blit(self.deathImages[counter], self.rect)
+                pygame.display.flip()
+                counter += 1
+        self.reset()
+        pygame.display.flip()
 
     def change_image(self):
         if self.moving:
@@ -50,8 +70,11 @@ class PacMan:
 
     def set_map(self, new_map, row_index, column_index):
         self.map = new_map
+        self.mapOrig = new_map.copy()
         self.row_index = row_index
         self.column_index = column_index
+        self.row_index_orig = self.row_index
+        self.column_index_orig = self.column_index
         self.go_left()
 
     def update(self):

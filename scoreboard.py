@@ -65,7 +65,7 @@ class ScoreBoard:
         if self.numberOfLives < 7:
             self.numberOfLives += value
             self.prep_lives()
-        if self.numberOfLives <= 0:
+        if self.numberOfLives < 0:
             self.game_over()
 
     def update_score(self, value):
@@ -92,12 +92,14 @@ class ScoreBoard:
     def prep_lives(self):
         self.livesRectList = [self.livesRect]                   # Original rect to recognize placement
         for i in range(1, self.numberOfLives):
-            newRect = self.livesRectList[i - 1].copy()          # Creates new rects for every life
-            newRect.top = self.livesRectList[i - 1].top
-            newRect.left = self.livesRectList[i - 1].right      # Places new life image next to previous one.
-            self.livesRectList.append(newRect)
+            new_rect = self.livesRectList[i - 1].copy()          # Creates new rects for every life
+            new_rect.top = self.livesRectList[i - 1].top
+            new_rect.left = self.livesRectList[i - 1].right      # Places new life image next to previous one.
+            self.livesRectList.append(new_rect)
 
     def blit_lives(self):
+        if self.numberOfLives <= 0:
+            return
         self.prep_lives()
         for life in self.livesRectList:
             self.screen.blit(self.livesImage, life)

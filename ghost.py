@@ -6,7 +6,8 @@ class Ghost:
     def __init__(self, image_library, screen, settings, x, y):
         self.screen = screen
         self.settings = settings
-        self.vulnerable_image_lib = image_library[self.settings.VulnerableIndices[0]: self.settings.VulnerableIndices[1]]
+        self.vulnerable_image_lib = image_library[self.settings.VulnerableIndices[0]:
+                                                  self.settings.VulnerableIndices[1]]
         self.vulnerableImage = self.vulnerable_image_lib[0]
         self.vulnerableIndex = 0
         self.coordinates = [x, y]

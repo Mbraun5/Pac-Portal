@@ -28,7 +28,10 @@ def import_image_library():
                  pygame.image.load('Images/PinkyUp1.png'), pygame.image.load('Images/PinkyUp2.png'),
                  pygame.image.load('Images/PinkyRight1.png'), pygame.image.load('Images/PinkyRight2.png'),
                  pygame.image.load('Images/VulnerableGhost1.png'), pygame.image.load('Images/VulnerableGhost2.png'),
-                 pygame.image.load('Images/VulnerableGhost3.png'), pygame.image.load('Images/VulnerableGhost4.png')]
+                 pygame.image.load('Images/VulnerableGhost3.png'), pygame.image.load('Images/VulnerableGhost4.png'),
+                 pygame.image.load('Images/Death1.png'), pygame.image.load('Images/Death2.png'),
+                 pygame.image.load('Images/Death3.png'), pygame.image.load('Images/Death4.png'),
+                 pygame.image.load('Images/Death5.png'), pygame.image.load('Images/Death6.png')]
     return image_lib
 
 
@@ -81,7 +84,33 @@ def next_level(ghosts, pacman):
         obj.reset()
 
 
-def check_collisions(ghosts, large_pills, pacman, pills, scoreboard):
+def check_ghost_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard):
+    for obj in ghosts:
+        if pygame.Rect.colliderect(obj.rect, pacman.rect) and obj.vulnerable is False:
+            pacman.die()
+            scoreboard.update_lives(-1)
+            for g in ghosts:
+                g.reset()
+            soft_reset(ghosts, large_pills, maze, pacman, pills, scoreboard)
+            break
+
+
+def soft_reset(ghosts, large_pills, maze, pacman, pills, scoreboard):
+    scoreboard.screen.fill(scoreboard.settings.get_bg_color())
+    for ghosts in ghosts:
+        ghosts.blit()
+    for pill in pills:
+        pill.blit()
+    for pill in large_pills:
+        pill.blit()
+    pacman.blit()
+    maze.draw_part_maze()
+    scoreboard.blit()
+    scoreboard.blit_lives()
+
+
+def check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard):
+    check_ghost_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard)
     for index, pill in enumerate(pills):
         if pacman.rect.colliderect(pill.rect):
             scoreboard.update_score(pill.value)
@@ -94,4 +123,3 @@ def check_collisions(ghosts, large_pills, pacman, pills, scoreboard):
         next_level(ghosts, pacman)
         return True
     return False
-

@@ -2,7 +2,6 @@ import pygame
 import sys
 import traceback
 import powerpill
-import time
 
 
 class Maze:

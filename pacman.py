@@ -7,6 +7,7 @@ import pac as p
 import scoreboard as sb
 import ghost as g
 import titleScreen as tS
+import time
 
 
 def run_game():
@@ -43,18 +44,26 @@ def run_game():
     timer3 = 1.5                    # ghostTimer
     delta_t = 0                     # Delta to subtract from time
     reset_flag = False
+    print(reset_flag)
 
     while True:
         gF.check_events(pacman)
         pacman.update()
-        reset_flag = gF.check_collisions(ghosts, large_pills, pacman, pills, scoreboard)
+        reset_flag = gF.check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard)
+
+        delta_t, timer, timer2, timer3 = gF.check_time(clock, delta_t, ghosts, large_pills, timer, timer2, timer3,
+                                                       pacman)
+        for pill in large_pills:
+            pill.blit()
+        for ghost in ghosts:
+            ghost.blit()
+        pacman.blit()
+        pygame.display.flip()
         if reset_flag:
             screen.fill(settings.get_bg_color())
             pills = maze.pills.copy()
             large_pills = maze.largePills.copy()
             maze.draw_part_maze()
-            pacman.set_map(maze.get_map(), maze.rowIndex, maze.columnIndex)
-            pacman.go_left()
             pacman.blit()
             for obj in ghosts:
                 obj.blit()
@@ -68,16 +77,7 @@ def run_game():
             delta_t = 0
             pygame.display.flip()
             reset_flag = False
-            continue
-
-        delta_t, timer, timer2, timer3 = gF.check_time(clock, delta_t, ghosts, large_pills, timer, timer2, timer3,
-                                                       pacman)
-        for pill in large_pills:
-            pill.blit()
-        for ghost in ghosts:
-            ghost.blit()
-        pacman.blit()
-        pygame.display.flip()
+            print(reset_flag)
 
 
 run_game()
