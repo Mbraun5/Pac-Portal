@@ -6,11 +6,10 @@ import time
 
 
 class Maze:
-    def __init__(self, image_lib, screen, settings, pacman):
+    def __init__(self, image_lib, screen, settings):
         self.__screen = screen
         self.__screenRect = screen.get_rect()
         self.__settings = settings
-        self.pacman = pacman
 
         self.__rect = pygame.Rect(0, 0, self.__settings.get_square_rect(), self.__settings.get_square_rect())
         self.__rectColor = settings.get_square_rect_color()
@@ -26,11 +25,11 @@ class Maze:
         self.clydeCoordinates = None
         self.inkyCoordinates = None
         self.pinkyCoordinates = None
+        self.pacmanCoordinates = None
 
         self.pills = []
         self.largePills = []
         self.parse_file()
-        self.draw_maze()
 
         self.print_map()
 
@@ -83,7 +82,7 @@ class Maze:
                         map_row.append(flag)
                         copy.left = copy.right
                     elif flag == "P":
-                        self.pacman.set_rect(copy.x, copy.y)
+                        self.pacmanCoordinates = [copy.x, copy.y]
                         self.rowIndex = len(self.map)
                         self.columnIndex = len(map_row)
                         map_row.append(flag)

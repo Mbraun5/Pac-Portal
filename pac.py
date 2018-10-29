@@ -2,7 +2,7 @@ import pygame
 
 
 class PacMan:
-    def __init__(self, image_library, screen, settings):
+    def __init__(self, coordinates, image_library, screen, settings):
         self.screen = screen
         self.settings = settings
         self.images = []
@@ -16,6 +16,8 @@ class PacMan:
         self.blitIndex = 1
         self.indexInc = 1
         self.rect = self.images[0].get_rect()
+        self.coordinates = coordinates
+        self.set_rect(self.coordinates[0], self.coordinates[1])
 
         self.speed = self.settings.pacSpeed
         self.direction = "right"
