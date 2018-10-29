@@ -92,10 +92,10 @@ class TitleScreen:
                                              self.settings.get_screen_height() / 2 + 20)
         self.pacman = pac.PacMan([300, self.settings.get_screen_height() / 2], image_library, screen, settings,
                                  sound_lib=None)
-        self.blinky = ghost.Blinky(image_library, screen, settings, 200, self.settings.get_screen_height() / 2)
-        self.inky = ghost.Inky(image_library, screen, settings, 155, self.settings.get_screen_height() / 2)
-        self.clyde = ghost.Clyde(image_library, screen, settings, 110, self.settings.get_screen_height() / 2)
-        self.pinky = ghost.Pinky(image_library, screen, settings, 65, self.settings.get_screen_height() / 2)
+        self.blinky = ghost.Blinky(self.clock, image_library, screen, settings, 200, self.settings.get_screen_height() / 2)
+        self.inky = ghost.Inky(self.clock, image_library, screen, settings, 155, self.settings.get_screen_height() / 2)
+        self.clyde = ghost.Clyde(self.clock, image_library, screen, settings, 110, self.settings.get_screen_height() / 2)
+        self.pinky = ghost.Pinky(self.clock, image_library, screen, settings, 65, self.settings.get_screen_height() / 2)
         self.ghosts = [self.blinky, self.pinky, self.inky, self.clyde]
         self.fakeGhosts = self.ghosts.copy()
         self.loop = True
@@ -381,13 +381,13 @@ class TitleScreen:
                                              self.settings.get_screen_height() / 2 + 20)
         self.pacman = pac.PacMan([300, self.settings.get_screen_height() / 2], self.image_library, self.screen,
                                  self.settings, sound_lib=None)
-        self.blinky = ghost.Blinky(self.image_library, self.screen, self.settings, 200,
+        self.blinky = ghost.Blinky(self.clock, self.image_library, self.screen, self.settings, 200,
                                    self.settings.get_screen_height() / 2)
-        self.inky = ghost.Inky(self.image_library, self.screen, self.settings, 155,
+        self.inky = ghost.Inky(self.clock, self.image_library, self.screen, self.settings, 155,
                                self.settings.get_screen_height() / 2)
-        self.clyde = ghost.Clyde(self.image_library, self.screen, self.settings, 110,
+        self.clyde = ghost.Clyde(self.clock, self.image_library, self.screen, self.settings, 110,
                                  self.settings.get_screen_height() / 2)
-        self.pinky = ghost.Pinky(self.image_library, self.screen, self.settings, 65,
+        self.pinky = ghost.Pinky(self.clock, self.image_library, self.screen, self.settings, 65,
                                  self.settings.get_screen_height() / 2)
         self.ghosts = [self.blinky, self.pinky, self.inky, self.clyde]
         self.fakeGhosts = self.ghosts.copy()

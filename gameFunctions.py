@@ -130,6 +130,8 @@ def check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard, sound
     for index, pill in enumerate(large_pills):
         if pacman.rect.colliderect(pill.rect):
             scoreboard.update_score(pill.value)
+            for g in ghosts:
+                g.set_vulnerable()
             del large_pills[index]
     if len(pills) == 0 and len(large_pills) == 0:
         next_level(ghosts, pacman)
