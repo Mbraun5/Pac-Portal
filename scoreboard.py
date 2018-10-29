@@ -1,4 +1,5 @@
 import pygame
+import gameFunctions as gF
 
 
 class ScoreBoard:
@@ -105,7 +106,43 @@ class ScoreBoard:
             self.screen.blit(self.livesImage, life)
 
     def game_over(self):
-        pass    # todo
+        pygame.mixer.stop()
+        font = pygame.font.Font('Fonts/PFont.ttf', 45)
+        current_score = self.currentScore
+        high_score = self.highScore
+        if current_score > high_score:
+            self.highScore = current_score
+        game_over_image = font.render("GAME OVER", True, self.settings.whiteFont)
+        game_over_rect = game_over_image.get_rect()
+        game_over_rect.centerx = self.settings.get_screen_width() / 2
+        game_over_rect.y = self.settings.get_screen_height() / 8
+
+        high_score_image = font.render("HIGH SCORE:{}".format(high_score), True, self.settings.whiteFont)
+        high_score_rect = high_score_image.get_rect()
+        high_score_rect.centerx = game_over_rect.centerx
+        high_score_rect.top = game_over_rect.bottom + 150
+
+        current_score_image = font.render("CURRENT SCORE:{}".format(current_score), True, self.settings.whiteFont)
+        current_score_rect = current_score_image.get_rect()
+        current_score_rect.centerx = game_over_rect.centerx
+        current_score_rect.top = high_score_rect.bottom + 150
+
+        continue_image = font.render("PRESS SPACE TO CONTINUE, Q TO EXIT".format(current_score), True,
+                                     self.settings.whiteFont)
+        continue_rect = continue_image.get_rect()
+        continue_rect.centerx = current_score_rect.centerx
+        continue_rect.top = current_score_rect.bottom + 150
+
+        self.currentScore = 0
+        while gF.wait_for_space(current_score):
+            self.screen.fill(self.settings.get_bg_color())
+            self.screen.blit(game_over_image, game_over_rect)
+            self.screen.blit(high_score_image, high_score_rect)
+            self.screen.blit(current_score_image, current_score_rect)
+            self.screen.blit(continue_image, continue_rect)
+            pygame.display.flip()
+
+        gF.append_score(current_score)
 
     def get_high_score(self):
         try:                                                    # Generates high score string of form "0000"

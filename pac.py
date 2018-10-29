@@ -1,11 +1,16 @@
 import pygame
+import time
 
 
 class PacMan:
-    def __init__(self, coordinates, image_library, screen, settings):
+    def __init__(self, coordinates, image_library, screen, settings, sound_lib):
         self.screen = screen
         self.settings = settings
         self.images = []
+        try:
+            self.death_sound = sound_lib[2]
+        except TypeError:
+            pass
         self.deathImages = image_library[self.settings.deathIndices[0]: self.settings.deathIndices[1]]
         for index in self.settings.pacIndexes:
             self.images.append(image_library[index])
@@ -51,6 +56,9 @@ class PacMan:
         self.go_left()
 
     def die(self):
+        pygame.mixer.stop()
+        pygame.mixer.Sound.play(self.death_sound)
+        time.sleep(0.5)
         self.screen.blit(self.deathImages[0], self.rect)
         pygame.display.flip()
         counter = 1
@@ -59,7 +67,10 @@ class PacMan:
                 self.screen.blit(self.deathImages[counter], self.rect)
                 pygame.display.flip()
                 counter += 1
+        pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.rect)
+        pygame.display.flip()
         self.reset()
+        time.sleep(1)
         pygame.display.flip()
 
     def change_image(self):

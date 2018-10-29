@@ -1,5 +1,6 @@
 import pygame
 import sys
+import time
 
 
 def import_image_library():
@@ -33,6 +34,16 @@ def import_image_library():
                  pygame.image.load('Images/Death3.png'), pygame.image.load('Images/Death4.png'),
                  pygame.image.load('Images/Death5.png'), pygame.image.load('Images/Death6.png')]
     return image_lib
+
+
+def import_sound_library():
+    sound_lib = [pygame.mixer.Sound('Sounds/Intro.wav'), pygame.mixer.Sound('Sounds/ConstantSound.wav'),
+                 pygame.mixer.Sound('Sounds/Death.wav'), pygame.mixer.Sound('Sounds/Eating.wav'),
+                 pygame.mixer.Sound('Sounds/Fruit.wav'), pygame.mixer.Sound('Sounds/GhostDeath.wav'),
+                 pygame.mixer.Sound('Sounds/GhostDeathTravel.wav'), pygame.mixer.Sound('Sounds/Vulnerable.wav')]
+    for sound in sound_lib:
+        sound.set_volume(0.4)
+    return sound_lib
 
 
 def check_key_down_events(event, pacman):
@@ -109,11 +120,12 @@ def soft_reset(ghosts, large_pills, maze, pacman, pills, scoreboard):
     scoreboard.blit_lives()
 
 
-def check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard):
+def check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard, sound):
     check_ghost_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard)
     for index, pill in enumerate(pills):
         if pacman.rect.colliderect(pill.rect):
             scoreboard.update_score(pill.value)
+            pygame.mixer.Sound.play(sound)
             del pills[index]
     for index, pill in enumerate(large_pills):
         if pacman.rect.colliderect(pill.rect):
@@ -123,3 +135,52 @@ def check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard):
         next_level(ghosts, pacman)
         return True
     return False
+
+
+def append_score(current_score):
+    score_list = []
+    try:
+        with open('high score.txt', 'r') as f:
+            new_one = f.readline()
+            while new_one != "":
+                score_list.append(int(new_one))
+                new_one = f.readline()
+            score_list.append(int(current_score))
+            score_list.sort(reverse=True)
+            while len(score_list) > 10:
+                del (score_list[10])
+            print(score_list)
+            f.close()
+        with open('high score.txt', 'w') as f:
+            for line in score_list:
+                f.write(str(line))
+                f.write("\n")
+            f.close()
+    except FileNotFoundError:
+        with open('high score.txt', 'w') as f:
+            f.write(current_score)
+
+
+def wait_for_space(current_score):
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                return False
+            elif event.key == pygame.K_q:
+                if current_score is not 0:
+                    append_score(current_score)
+                sys.exit(0)
+    return True
+
+
+def start_game(ghosts, large_pills, pacman, pills, sound):
+    pacman.blit()
+    for ghost in ghosts:
+        ghost.blit()
+    for pill in pills:
+        pill.blit()
+    for pill in large_pills:
+        pill.blit()
+    pygame.display.flip()
+    pygame.mixer.Sound.play(sound)
+    time.sleep(4.5)

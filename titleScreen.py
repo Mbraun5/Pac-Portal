@@ -4,6 +4,7 @@ import pac
 import ghost
 import powerpill
 import sys
+import gameFunctions as gF
 
 
 class TitleScreen:
@@ -89,7 +90,8 @@ class TitleScreen:
         self.collisioncounter = 0
         self.pill = powerpill.LargePowerPill(image_library, screen, settings, 1000,
                                              self.settings.get_screen_height() / 2 + 20)
-        self.pacman = pac.PacMan([300, self.settings.get_screen_height() / 2], image_library, screen, settings)
+        self.pacman = pac.PacMan([300, self.settings.get_screen_height() / 2], image_library, screen, settings,
+                                 sound_lib=None)
         self.blinky = ghost.Blinky(image_library, screen, settings, 200, self.settings.get_screen_height() / 2)
         self.inky = ghost.Inky(image_library, screen, settings, 155, self.settings.get_screen_height() / 2)
         self.clyde = ghost.Clyde(image_library, screen, settings, 110, self.settings.get_screen_height() / 2)
@@ -182,7 +184,9 @@ class TitleScreen:
                 if self.playRectTwo.collidepoint(pygame.mouse.get_pos()):
                     self.loop = False
                 elif self.hsRectTwo.collidepoint(pygame.mouse.get_pos()):
-                    pass
+                    self.high_score_screen()
+                    self.title_loop()
+                    self.loop = False
         if self.playRectOne.collidepoint(pygame.mouse.get_pos()):
             pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.playRectOne)
             self.screen.blit(self.playImgTwo, self.playRectTwo)
@@ -376,7 +380,7 @@ class TitleScreen:
         self.pill = powerpill.LargePowerPill(self.image_library, self.screen, self.settings, 1000,
                                              self.settings.get_screen_height() / 2 + 20)
         self.pacman = pac.PacMan([300, self.settings.get_screen_height() / 2], self.image_library, self.screen,
-                                 self.settings)
+                                 self.settings, sound_lib=None)
         self.blinky = ghost.Blinky(self.image_library, self.screen, self.settings, 200,
                                    self.settings.get_screen_height() / 2)
         self.inky = ghost.Inky(self.image_library, self.screen, self.settings, 155,
@@ -396,3 +400,67 @@ class TitleScreen:
     def refresh_screen(self):
         self.screen.fill(self.settings.get_bg_color())
         pygame.display.flip()
+
+    def high_score_screen(self):
+        self.screen.fill(self.settings.get_bg_color())
+        font = pygame.font.Font('Fonts/PFont.ttf', 40)
+        text_color = self.settings.whiteFont
+        image_rect = None
+        image_one_rect = None
+        high_score_image = font.render("HIGH SCORES!", True, text_color, self.settings.get_bg_color())
+        high_score_rect = high_score_image.get_rect()
+        high_score_rect.centerx = self.settings.get_screen_width() / 2
+        high_score_rect.y = 100
+        self.screen.blit(high_score_image, high_score_rect)
+        pygame.display.flip()
+        try:
+            with open("high score.txt") as f:
+                score = f.readline()
+                if score == "":
+                    return
+                score = score.strip('\n')
+                image_one = font.render("Score: {}".format(score), True, text_color, self.settings.get_bg_color())
+                image_one_rect = image_one.get_rect()
+                image_one_rect.centerx = self.settings.get_screen_width() / 2
+                image_one_rect.y = 200
+                self.screen.blit(image_one, image_one_rect)
+                pygame.display.flip()
+                time.sleep(0.2)
+                for count in range(0, 10):
+                    score = f.readline()
+                    if score == "":
+                        break
+                    score = score.strip('\n')
+                    image = font.render("Score: {}".format(score), True, text_color, self.settings.get_bg_color())
+                    image_rect = image.get_rect()
+                    image_rect.left = image_one_rect.left
+                    image_rect.top = image_one_rect.bottom
+                    image_one_rect = image_rect
+                    self.screen.blit(image, image_rect)
+                    pygame.display.flip()
+                    time.sleep(0.2)
+        except FileNotFoundError:
+            pass
+        continue_image = font.render("PRESS SPACE TO CONTINUE, Q TO EXIT", True, text_color)
+        continue_rect = continue_image.get_rect()
+        try:
+            continue_rect.centerx = image_rect.centerx
+            continue_rect.top = image_rect.bottom + 50
+        except AttributeError:
+            continue_rect.centerx = image_one_rect.centerx
+            continue_rect.top = image_one_rect.bottom + 50
+        self.screen.blit(continue_image, continue_rect)
+        pygame.display.flip()
+        while gF.wait_for_space(0):
+            continue
+        self.screen.fill(self.settings.get_bg_color())
+
+    @staticmethod
+    #   Ensures a high score file is inside directory. If one is not there, makes one. If it is there, it does nothing.
+    def create_high_score_file():
+        try:
+            with open('high score.txt', 'r') as f:
+                f.close()
+        except FileNotFoundError:
+            with open('high score.txt', 'w') as f:
+                f.write("0000")

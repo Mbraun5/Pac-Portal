@@ -1,7 +1,3 @@
-import pygame
-import time
-
-
 class Ghost:
     def __init__(self, image_library, screen, settings, x, y):
         self.screen = screen

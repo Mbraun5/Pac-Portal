@@ -24,8 +24,9 @@ def run_game():
 
     # Generate Game Objects
     image_lib = gF.import_image_library()
+    sound_lib = gF.import_sound_library()
     maze = m.Maze(image_lib, screen, settings)
-    pacman = p.PacMan(maze.pacmanCoordinates, image_lib, screen, settings)
+    pacman = p.PacMan(maze.pacmanCoordinates, image_lib, screen, settings, sound_lib)
     pills = maze.pills.copy()
     large_pills = maze.largePills.copy()
     blinky = g.Blinky(image_lib, screen, settings, maze.blinkyCoordinates[0], maze.blinkyCoordinates[1])
@@ -36,7 +37,7 @@ def run_game():
     title_sequence = tS.TitleScreen(clock, pacman.images.copy(), image_lib, screen, settings)
     title_sequence.refresh_screen()
     pacman.set_map(maze.get_map(), maze.rowIndex, maze.columnIndex)
-    maze.draw_maze()
+    maze.draw_part_maze()
     scoreboard = sb.ScoreBoard(maze, screen, settings)
 
     timer = 1                       # pacTimer
@@ -45,12 +46,13 @@ def run_game():
     delta_t = 0                     # Delta to subtract from time
     reset_flag = False
     print(reset_flag)
+    gF.start_game(ghosts, large_pills, pacman, pills, sound_lib[0])
+    pygame.mixer.Sound.play(sound_lib[1], -1)
 
     while True:
         gF.check_events(pacman)
         pacman.update()
-        reset_flag = gF.check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard)
-
+        reset_flag = gF.check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard, sound_lib[3])
         delta_t, timer, timer2, timer3 = gF.check_time(clock, delta_t, ghosts, large_pills, timer, timer2, timer3,
                                                        pacman)
         for pill in large_pills:
@@ -64,18 +66,11 @@ def run_game():
             pills = maze.pills.copy()
             large_pills = maze.largePills.copy()
             maze.draw_part_maze()
-            pacman.blit()
-            for obj in ghosts:
-                obj.blit()
-            for pill in pills:
-                pill.blit()
-            for pill in large_pills:
-                pill.blit()
+            gF.start_game(ghosts, large_pills, pacman, pills, sound_lib[0])
             timer = 1
             timer2 = 0.5
             timer3 = 1.5
             delta_t = 0
-            pygame.display.flip()
             reset_flag = False
             print(reset_flag)
 
