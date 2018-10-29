@@ -75,7 +75,13 @@ def check_time(clock, delta_t, ghosts, large_pills, timer, timer2, timer3, pacma
     return delta_t, timer, timer2, timer3
 
 
-def check_collisions(large_pills, pacman, pills, scoreboard):
+def next_level(ghosts, pacman):
+    pacman.reset()
+    for obj in ghosts:
+        obj.reset()
+
+
+def check_collisions(ghosts, large_pills, pacman, pills, scoreboard):
     for index, pill in enumerate(pills):
         if pacman.rect.colliderect(pill.rect):
             scoreboard.update_score(pill.value)
@@ -84,3 +90,8 @@ def check_collisions(large_pills, pacman, pills, scoreboard):
         if pacman.rect.colliderect(pill.rect):
             scoreboard.update_score(pill.value)
             del large_pills[index]
+    if len(pills) == 0 and len(large_pills) == 0:
+        next_level(ghosts, pacman)
+        return True
+    return False
+

@@ -107,6 +107,12 @@ class Maze:
             pill.blit()
         pygame.display.flip()
 
+    def draw_part_maze(self):
+        for obj in self.map:
+            for item in obj:
+                if isinstance(item, pygame.Rect):
+                    self.__screen.blit(self.image_lib[3], item)
+
     def get_map(self):
         return self.map
 

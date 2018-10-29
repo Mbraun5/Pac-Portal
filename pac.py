@@ -35,6 +35,13 @@ class PacMan:
         self.rect.x = x
         self.rect.y = y
 
+    def reset(self):
+        self.rect.x = self.coordinates[0]
+        self.rect.y = self.coordinates[1]
+        self.indexInc = 1
+        self.blitIndex = 1
+        self.blitCounter = 0
+
     def change_image(self):
         if self.moving:
             if self.blitIndex == 2 or self.blitIndex == 0:
