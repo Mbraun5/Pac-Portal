@@ -25,10 +25,14 @@ class PacMan:
         self.orangeImage = image_library[59]
         self.blueActive = False
         self.orangeActive = False
+        self.createBlue = False
+        self.createOrange = False
         self.blueRect = self.blueImage.get_rect()
         self.orangeRect = self.orangeImage.get_rect()
-        self.storeBlueMap = []
-        self.storeOrangeMap = []
+        self.blue_portal_row_index = None
+        self.blue_portal_column_index = None
+        self.orange_portal_row_index = None
+        self.orange_portal_column_index = None
 
         self.blitCounter = 0
         self.blitIndex = 1
@@ -46,36 +50,64 @@ class PacMan:
 
         self.travelDistance = 60
 
+    def set_blue_portal(self):
+        if not self.blueActive or self.createBlue:
+            self.createBlue = True
+
+    def set_orange_portal(self):
+        if not self.orangeActive or self.createOrange:
+            self.createOrange = True
+
     def create_blue_portal(self):
         if not self.blueActive:
             self.blueRect.x = self.rect.x
             self.blueRect.y = self.rect.y
-            self.storeBlueMap = self.map.copy()
+            self.blue_portal_row_index = self.row_index
+            self.blue_portal_column_index = self.column_index
             self.blueActive = True
 
     def create_orange_portal(self):
         if not self.orangeActive:
             self.orangeRect.x = self.rect.x
             self.orangeRect.y = self.rect.y
-            self.storeOrangeMap = self.map.copy()
+            self.orange_portal_row_index = self.row_index
+            self.orange_portal_column_index = self.column_index
             self.orangeActive = True
 
     def check_portal_collisions(self):
+        if self.createBlue and self.createOrange:
+            self.createBlue = False
+            self.createOrange = False
         if not self.blueActive or not self.orangeActive:
             return
         if self.blueActive and self.orangeActive:
             if pygame.Rect.contains(self.rect, self.blueRect):
                 self.rect.x = self.orangeRect.x
                 self.rect.y = self.orangeRect.y
-                self.map = self.storeBlueMap.copy()
+                self.map[self.row_index][self.column_index] = '.'
+                self.map[self.orange_portal_row_index][self.orange_portal_column_index] = 'P'
+                self.column_index = self.orange_portal_column_index
+                self.row_index = self.orange_portal_row_index
                 self.continue_direction()
+                self.blueActive = False
+                self.orangeActive = False
+                pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.blueRect)
+                pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.orangeRect)
             elif pygame.Rect.contains(self.rect, self.orangeRect):
                 self.rect.x = self.blueRect.x
                 self.rect.y = self.blueRect.y
-                self.map = self.storeBlueMap
+                self.map[self.row_index][self.column_index] = '.'
+                self.map[self.blue_portal_row_index][self.blue_portal_column_index] = 'P'
+                self.column_index = self.blue_portal_column_index
+                self.row_index = self.blue_portal_row_index
                 self.continue_direction()
+                self.blueActive = False
+                self.orangeActive = False
+                pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.blueRect)
+                pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.orangeRect)
 
     def continue_direction(self):
+        self.print_map()
         self.check_move(self.direction)
 
     def blit(self):
@@ -139,6 +171,10 @@ class PacMan:
             if self.direction == "right" or self.direction == "left":
                 self.rect.x += self.speed
                 if self.mapCounter == 5:
+                    if self.createBlue:
+                        self.create_blue_portal()
+                    if self.createOrange:
+                        self.create_orange_portal()
                     self.map[self.row_index][self.column_index] = '.'
                     self.column_index += int(self.speed/abs(self.speed))
                     self.map[self.row_index][self.column_index] = 'P'
@@ -147,6 +183,10 @@ class PacMan:
             else:
                 self.rect.y += self.speed
                 if self.mapCounter == 5:
+                    if self.createBlue:
+                        self.create_blue_portal()
+                    if self.createOrange:
+                        self.create_orange_portal()
                     self.map[self.row_index][self.column_index] = '.'
                     self.row_index += int(self.speed/abs(self.speed))
                     self.map[self.row_index][self.column_index] = 'P'
@@ -167,6 +207,7 @@ class PacMan:
                 elif self.updateFlag[1] == "down":
                     self.go_down()
                 self.updateFlag[0] = False
+        self.check_portal_collisions()
         # self.print_map()
 
     def check_move(self, direction):

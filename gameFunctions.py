@@ -59,9 +59,9 @@ def check_key_down_events(event, pacman):
     elif event.key == pygame.K_UP:
         pacman.check_move("up")
     elif event.key == pygame.K_a:
-        pacman.create_blue_portal()
+        pacman.set_blue_portal()
     elif event.key == pygame.K_s:
-        pacman.create_orange_portal()
+        pacman.set_orange_portal()
 
 
 def check_events(pacman):
