@@ -28,6 +28,7 @@ class Maze:
 
         self.pills = []
         self.largePills = []
+        self.nodes = []
         self.parse_file()
 
         self.print_map()
@@ -67,6 +68,10 @@ class Maze:
                     elif flag == "b":
                         self.blinkyCoordinates = [copy.x, copy.y]
                         map_row.append(flag)
+                        new_rect = pygame.Rect(0, 0, 45, 45)
+                        new_rect.x = copy.x
+                        new_rect.y = copy.y
+                        self.nodes.append(new_rect)
                         copy.left = copy.right
                     elif flag == "i":
                         self.inkyCoordinates = [copy.x, copy.y]
@@ -86,6 +91,13 @@ class Maze:
                         self.columnIndex = len(map_row)
                         map_row.append(flag)
                         copy.left = copy.right
+                    elif flag == "N":
+                        new_rect = pygame.Rect(0, 0, 45, 45)
+                        new_rect.x = copy.x
+                        new_rect.y = copy.y
+                        self.nodes.append(new_rect)
+                        copy.left = copy.right
+                        map_row.append(flag)
                     elif flag == "x":
                         map_row.append(copy.copy())
                         copy.left = copy.right

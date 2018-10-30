@@ -32,7 +32,8 @@ def import_image_library():
                  pygame.image.load('Images/VulnerableGhost3.png'), pygame.image.load('Images/VulnerableGhost4.png'),
                  pygame.image.load('Images/Death1.png'), pygame.image.load('Images/Death2.png'),
                  pygame.image.load('Images/Death3.png'), pygame.image.load('Images/Death4.png'),
-                 pygame.image.load('Images/Death5.png'), pygame.image.load('Images/Death6.png')]
+                 pygame.image.load('Images/Death5.png'), pygame.image.load('Images/Death6.png'),
+                 pygame.image.load('Images/BluePortal.png'), pygame.image.load('Images/OrangePortal.png')]
     return image_lib
 
 
@@ -57,6 +58,10 @@ def check_key_down_events(event, pacman):
         pacman.check_move("down")
     elif event.key == pygame.K_UP:
         pacman.check_move("up")
+    elif event.key == pygame.K_a:
+        pacman.create_blue_portal()
+    elif event.key == pygame.K_s:
+        pacman.create_orange_portal()
 
 
 def check_events(pacman):

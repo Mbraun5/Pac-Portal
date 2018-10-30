@@ -54,6 +54,7 @@ def run_game():
         reset_flag = gF.check_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard, sound_lib[3])
         delta_t, timer, timer2, timer3 = gF.check_time(clock, delta_t, ghosts, large_pills, timer, timer2, timer3,
                                                        pacman)
+        pacman.check_portal_collisions()
         for pill in large_pills:
             pill.blit()
         for ghost in ghosts:

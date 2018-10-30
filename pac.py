@@ -21,6 +21,15 @@ class PacMan:
         self.row_index_orig = None
         self.column_index_orig = None
 
+        self.blueImage = image_library[58]
+        self.orangeImage = image_library[59]
+        self.blueActive = False
+        self.orangeActive = False
+        self.blueRect = self.blueImage.get_rect()
+        self.orangeRect = self.orangeImage.get_rect()
+        self.storeBlueMap = []
+        self.storeOrangeMap = []
+
         self.blitCounter = 0
         self.blitIndex = 1
         self.indexInc = 1
@@ -37,7 +46,43 @@ class PacMan:
 
         self.travelDistance = 60
 
+    def create_blue_portal(self):
+        if not self.blueActive:
+            self.blueRect.x = self.rect.x
+            self.blueRect.y = self.rect.y
+            self.storeBlueMap = self.map.copy()
+            self.blueActive = True
+
+    def create_orange_portal(self):
+        if not self.orangeActive:
+            self.orangeRect.x = self.rect.x
+            self.orangeRect.y = self.rect.y
+            self.storeOrangeMap = self.map.copy()
+            self.orangeActive = True
+
+    def check_portal_collisions(self):
+        if not self.blueActive or not self.orangeActive:
+            return
+        if self.blueActive and self.orangeActive:
+            if pygame.Rect.contains(self.rect, self.blueRect):
+                self.rect.x = self.orangeRect.x
+                self.rect.y = self.orangeRect.y
+                self.map = self.storeBlueMap.copy()
+                self.continue_direction()
+            elif pygame.Rect.contains(self.rect, self.orangeRect):
+                self.rect.x = self.blueRect.x
+                self.rect.y = self.blueRect.y
+                self.map = self.storeBlueMap
+                self.continue_direction()
+
+    def continue_direction(self):
+        self.check_move(self.direction)
+
     def blit(self):
+        if self.blueActive:
+            self.screen.blit(self.blueImage, self.blueRect)
+        if self.orangeActive:
+            self.screen.blit(self.orangeImage, self.orangeRect)
         self.screen.blit(self.images[self.blitIndex], self.rect)
 
     def set_rect(self, x, y):

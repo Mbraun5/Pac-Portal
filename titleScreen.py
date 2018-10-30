@@ -92,9 +92,11 @@ class TitleScreen:
                                              self.settings.get_screen_height() / 2 + 20)
         self.pacman = pac.PacMan([300, self.settings.get_screen_height() / 2], image_library, screen, settings,
                                  sound_lib=None)
-        self.blinky = ghost.Blinky(self.clock, image_library, screen, settings, 200, self.settings.get_screen_height() / 2)
+        self.blinky = ghost.Blinky(self.clock, image_library, screen, settings, 200,
+                                   self.settings.get_screen_height() / 2)
         self.inky = ghost.Inky(self.clock, image_library, screen, settings, 155, self.settings.get_screen_height() / 2)
-        self.clyde = ghost.Clyde(self.clock, image_library, screen, settings, 110, self.settings.get_screen_height() / 2)
+        self.clyde = ghost.Clyde(self.clock, image_library, screen, settings, 110,
+                                 self.settings.get_screen_height() / 2)
         self.pinky = ghost.Pinky(self.clock, image_library, screen, settings, 65, self.settings.get_screen_height() / 2)
         self.ghosts = [self.blinky, self.pinky, self.inky, self.clyde]
         self.fakeGhosts = self.ghosts.copy()

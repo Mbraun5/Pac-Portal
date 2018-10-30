@@ -45,13 +45,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.9999998"
-     inkscape:cx="517.34967"
-     inkscape:cy="-62.286683"
+     inkscape:cx="455.61059"
+     inkscape:cy="74.821711"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="2560"
-     inkscape:window-height="1377"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -83,7 +83,7 @@
        height="741.90277"
        x="-665.43707"
        y="-159.12881"
-       style="stroke:#ffffff;stroke-width:0.25386858;stroke-opacity:1;fill:#000000" />
+       style="fill:#000000;stroke:#ffffff;stroke-width:0.25386858;stroke-opacity:1" />
     <path
        id="path3718-3"
        style="fill:#ffff00;stroke-width:0.20337212"
@@ -97,13 +97,13 @@
        d="m 13.810593,239.78007 a 75,75 0 0 1 -83.13987,22.81333 75,75 0 0 1 -49.670613,-70.46642 75,75 0 0 1 49.431714,-70.6342 75,75 0 0 1 83.216644,22.53166 L -44,192 Z" />
     <circle
        id="path3718-3-2"
-       style="fill:#ffff00;stroke-width:0.01327286"
+       style="fill:#ff7f2a;stroke-width:0.01327286"
        cx="137.18645"
        cy="265.64691"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
        r="4.8947916"
-       inkscape:export-filename="C:\Users\Braun\Desktop\Pacman Portal\Images\Pacmang.png" />
+       inkscape:export-filename="C:\Users\Matthew\Desktop\Pycharm Programs\Pac-Portal\Images\OrangePortal.png" />
     <rect
        style="fill:#000000;stroke-width:0.00740436"
        id="rect3752-9"
@@ -120,7 +120,7 @@
        y="259.69376"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
-       inkscape:export-filename="C:\Users\Braun\Desktop\Pacman Portal\Images\Pacmang.png" />
+       inkscape:export-filename="C:\Users\Matthew\Desktop\Pycharm Programs\Pac-Portal\Images\OrangePortal.png" />
     <rect
        style="fill:#000000;stroke-width:0.00678633"
        id="rect3752-9-0-7"
@@ -130,7 +130,7 @@
        y="259.69376"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
-       inkscape:export-filename="C:\Users\Braun\Desktop\Pacman Portal\Images\Pacmang.png" />
+       inkscape:export-filename="C:\Users\Matthew\Desktop\Pycharm Programs\Pac-Portal\Images\OrangePortal.png" />
     <rect
        style="fill:#000000;stroke-width:0.00678633"
        id="rect3752-9-0-7-6"
@@ -140,7 +140,7 @@
        y="270.54166"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
-       inkscape:export-filename="C:\Users\Braun\Desktop\Pacman Portal\Images\Pacmang.png" />
+       inkscape:export-filename="C:\Users\Matthew\Desktop\Pycharm Programs\Pac-Portal\Images\OrangePortal.png" />
     <rect
        style="fill:#000000;stroke-width:0.00678633"
        id="rect3752-9-0-7-6-6"
@@ -150,7 +150,7 @@
        y="259.69376"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
-       inkscape:export-filename="C:\Users\Braun\Desktop\Pacman Portal\Images\Pacmang.png" />
+       inkscape:export-filename="C:\Users\Matthew\Desktop\Pycharm Programs\Pac-Portal\Images\OrangePortal.png" />
     <path
        id="path3718-3-2-6"
        style="fill:#ffff00;stroke-width:0.01386908"
