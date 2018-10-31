@@ -394,6 +394,10 @@ class TitleScreen:
                                  self.settings.get_screen_height() / 2)
         self.pinky = ghost.Pinky(self.clock, self.image_library, self.screen, self.settings, self.sounds, 65,
                                  self.settings.get_screen_height() / 2)
+        self.blinky.change_direction("Right")
+        self.pinky.change_direction("Right")
+        self.inky.change_direction("Right")
+        self.clyde.change_direction("Right")
         self.ghosts = [self.blinky, self.pinky, self.inky, self.clyde]
         self.fakeGhosts = self.ghosts.copy()
         self.loop = True

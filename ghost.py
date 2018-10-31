@@ -1,9 +1,10 @@
 import pygame
 import time
+import pathfinder
 
 
 class Ghost:
-    def __init__(self, clock, image_library, screen, settings, sounds, x, y):
+    def __init__(self, clock, image_library, screen, settings, sounds, x, y, nodes):
         self.screen = screen
         self.clock = clock
         self.settings = settings
@@ -21,6 +22,10 @@ class Ghost:
         self.vulnerable = False
         self.vulnerableTimer = 8
         self.delta_t = 0
+        self.path = None
+        self.nodes = nodes
+        if self.nodes is not None:
+            self.pathfinder = pathfinder.Pathfinder(self.nodes)
 
         self.ghostFont = pygame.font.Font('Fonts/PFont.ttf', 30)
         self.twoHunImg = self.ghostFont.render("200", True, self.settings.whiteFont, self.settings.get_bg_color())
@@ -34,6 +39,11 @@ class Ghost:
         self.scoreList = [self.twoHunImg, self.fourHunImg, self.eightHunImg, self.sixteenHunImg]
         self.rectList = [self.twoRect, self.fourRect, self.eightRect, self.sixteenRect]
 
+        self.direction = "Up"
+
+        self.dx = 3
+        self.dy = 3
+
     def blit(self):
         if not self.vulnerable:
             self.screen.blit(self.image, self.rect)
@@ -46,6 +56,17 @@ class Ghost:
         self.rect.x = self.coordinates[0]
         self.rect.y = self.coordinates[1]
         self.index = 4
+
+    def change_direction(self, direction):
+        self.direction = direction
+        if direction == "Up":
+            self.index = 4
+        elif direction == "Right":
+            self.index = 6
+        elif direction == "Left":
+            self.index = 2
+        elif direction == "Down":
+            self.index = 0
 
     def change_image(self):
         if not self.vulnerable:
@@ -96,8 +117,8 @@ class Ghost:
 
 
 class Blinky(Ghost):
-    def __init__(self, clock, image_library, screen, settings, sounds, x, y):
-        super().__init__(clock, image_library, screen, settings, sounds, x, y)
+    def __init__(self, clock, image_library, screen, settings, sounds, x, y, nodes=None):
+        super().__init__(clock, image_library, screen, settings, sounds, x, y, nodes)
         self.image_lib = image_library[settings.BlinkyIndices[0]: settings.BlinkyIndices[1]]
         self.index = 4                                  # Ghosts start game looking up.
         self.image = self.image_lib[self.index]
@@ -107,8 +128,8 @@ class Blinky(Ghost):
 
 
 class Clyde(Ghost):
-    def __init__(self, clock, image_library, screen, settings, sounds, x, y):
-        super().__init__(clock, image_library, screen, settings, sounds, x, y)
+    def __init__(self, clock, image_library, screen, settings, sounds, x, y, nodes=None):
+        super().__init__(clock, image_library, screen, settings, sounds, x, y, nodes)
         self.image_lib = image_library[settings.ClydeIndices[0]: settings.ClydeIndices[1]]
         self.index = 4                                  # Ghosts start game looking up.
         self.image = self.image_lib[self.index]
@@ -118,8 +139,8 @@ class Clyde(Ghost):
 
 
 class Inky(Ghost):
-    def __init__(self, clock, image_library, screen, settings, sounds, x, y):
-        super().__init__(clock, image_library, screen, settings, sounds, x, y)
+    def __init__(self, clock, image_library, screen, settings, sounds, x, y, nodes=None):
+        super().__init__(clock, image_library, screen, settings, sounds, x, y, nodes)
         self.image_lib = image_library[settings.InkyIndices[0]: settings.InkyIndices[1]]
         self.index = 4                                  # Ghosts start game looking up.
         self.image = self.image_lib[self.index]
@@ -129,8 +150,8 @@ class Inky(Ghost):
 
 
 class Pinky(Ghost):
-    def __init__(self, clock, image_library, screen, settings, sounds, x, y):
-        super().__init__(clock, image_library, screen, settings, sounds, x, y)
+    def __init__(self, clock, image_library, screen, settings, sounds, x, y, nodes=None):
+        super().__init__(clock, image_library, screen, settings, sounds, x, y, nodes)
         self.image_lib = image_library[settings.PinkyIndices[0]: settings.PinkyIndices[1]]
         self.index = 4                                  # Ghosts start game looking up.
         self.image = self.image_lib[self.index]

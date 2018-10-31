@@ -30,10 +30,13 @@ def run_game():
     pills = maze.pills.copy()
     large_pills = maze.largePills.copy()
     blinky = g.Blinky(clock, image_lib, screen, settings, sound_lib, maze.blinkyCoordinates[0],
-                      maze.blinkyCoordinates[1])
-    clyde = g.Clyde(clock, image_lib, screen, settings, sound_lib, maze.clydeCoordinates[0], maze.clydeCoordinates[1])
-    inky = g.Inky(clock, image_lib, screen, settings, sound_lib, maze.inkyCoordinates[0], maze.inkyCoordinates[1])
-    pinky = g.Pinky(clock, image_lib, screen, settings, sound_lib, maze.pinkyCoordinates[0], maze.pinkyCoordinates[1])
+                      maze.blinkyCoordinates[1], maze.nodes)
+    clyde = g.Clyde(clock, image_lib, screen, settings, sound_lib, maze.clydeCoordinates[0], maze.clydeCoordinates[1],
+                    maze.nodes)
+    inky = g.Inky(clock, image_lib, screen, settings, sound_lib, maze.inkyCoordinates[0], maze.inkyCoordinates[1],
+                  maze.nodes)
+    pinky = g.Pinky(clock, image_lib, screen, settings, sound_lib, maze.pinkyCoordinates[0], maze.pinkyCoordinates[1],
+                    maze.nodes)
     ghosts = [blinky, clyde, inky, pinky]
     title_sequence = tS.TitleScreen(clock, pacman.images.copy(), image_lib, screen, settings)
     title_sequence.refresh_screen()
