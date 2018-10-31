@@ -17,6 +17,7 @@ class TitleScreen:
         self.regularPacImages = pac_images.copy()
         for index, image in enumerate(self.pac_images):
             self.pac_images[index] = pygame.transform.rotozoom(image, 0, 3)
+        self.sounds = None
 
         # Text Settings
         self.font = pygame.font.Font('Fonts/PFont.ttf', 150)
@@ -92,12 +93,14 @@ class TitleScreen:
                                              self.settings.get_screen_height() / 2 + 20)
         self.pacman = pac.PacMan([300, self.settings.get_screen_height() / 2], image_library, screen, settings,
                                  sound_lib=None)
-        self.blinky = ghost.Blinky(self.clock, image_library, screen, settings, 200,
+        self.blinky = ghost.Blinky(self.clock, image_library, screen, settings, self.sounds, 200,
                                    self.settings.get_screen_height() / 2)
-        self.inky = ghost.Inky(self.clock, image_library, screen, settings, 155, self.settings.get_screen_height() / 2)
-        self.clyde = ghost.Clyde(self.clock, image_library, screen, settings, 110,
+        self.inky = ghost.Inky(self.clock, image_library, screen, settings, self.sounds, 155,
+                               self.settings.get_screen_height() / 2)
+        self.clyde = ghost.Clyde(self.clock, image_library, screen, settings, self.sounds, 110,
                                  self.settings.get_screen_height() / 2)
-        self.pinky = ghost.Pinky(self.clock, image_library, screen, settings, 65, self.settings.get_screen_height() / 2)
+        self.pinky = ghost.Pinky(self.clock, image_library, screen, settings, self.sounds, 65,
+                                 self.settings.get_screen_height() / 2)
         self.ghosts = [self.blinky, self.pinky, self.inky, self.clyde]
         self.fakeGhosts = self.ghosts.copy()
         self.loop = True
@@ -383,13 +386,13 @@ class TitleScreen:
                                              self.settings.get_screen_height() / 2 + 20)
         self.pacman = pac.PacMan([300, self.settings.get_screen_height() / 2], self.image_library, self.screen,
                                  self.settings, sound_lib=None)
-        self.blinky = ghost.Blinky(self.clock, self.image_library, self.screen, self.settings, 200,
+        self.blinky = ghost.Blinky(self.clock, self.image_library, self.screen, self.settings, self.sounds, 200,
                                    self.settings.get_screen_height() / 2)
-        self.inky = ghost.Inky(self.clock, self.image_library, self.screen, self.settings, 155,
+        self.inky = ghost.Inky(self.clock, self.image_library, self.screen, self.settings, self.sounds, 155,
                                self.settings.get_screen_height() / 2)
-        self.clyde = ghost.Clyde(self.clock, self.image_library, self.screen, self.settings, 110,
+        self.clyde = ghost.Clyde(self.clock, self.image_library, self.screen, self.settings, self.sounds, 110,
                                  self.settings.get_screen_height() / 2)
-        self.pinky = ghost.Pinky(self.clock, self.image_library, self.screen, self.settings, 65,
+        self.pinky = ghost.Pinky(self.clock, self.image_library, self.screen, self.settings, self.sounds, 65,
                                  self.settings.get_screen_height() / 2)
         self.ghosts = [self.blinky, self.pinky, self.inky, self.clyde]
         self.fakeGhosts = self.ghosts.copy()

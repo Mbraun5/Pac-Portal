@@ -45,6 +45,14 @@ class ScoreBoard:
         self.livesTextRect.left = self.currentScoreRect.right + 180
         self.livesTextRect.bottom = self.currentScoreRect.bottom
 
+        #   Rules Message
+        self.rulesFont = pygame.font.Font('Fonts/PFont.ttf', 35)
+        self.rulesImg = self.rulesFont.render("PRESS 'A' TO CREATE BLUE PORTAL, 'S' to create ORANGE PORTAL", True,
+                                              self.settings.yellowFont, self.settings.get_bg_color())
+        self.rulesRect = self.rulesImg.get_rect()
+        self.rulesRect.centerx = self.settings.get_screen_width() / 2
+        self.rulesRect.top = self.livesTextRect.bottom + 50
+
         #   Pac Image for lives
         self.livesImage = pygame.transform.flip(maze.image_lib[self.settings.pacIndexes[1]], True, False)
         self.livesRect = self.livesImage.get_rect()
@@ -61,6 +69,7 @@ class ScoreBoard:
         self.screen.blit(self.highScoreTextImage, self.highScoreTextRect)
         self.screen.blit(self.highScoreValueImage, self.highScoreValueRect)
         self.screen.blit(self.livesTextImage, self.livesTextRect)
+        self.screen.blit(self.rulesImg, self.rulesRect)
 
     def update_lives(self, value):
         if self.numberOfLives < 7:

@@ -111,6 +111,10 @@ def check_ghost_collisions(ghosts, large_pills, maze, pacman, pills, scoreboard)
                 g.reset()
             soft_reset(ghosts, large_pills, maze, pacman, pills, scoreboard)
             break
+        elif pygame.Rect.colliderect(obj.rect, pacman.rect) and obj.vulnerable is True:
+            pacman.ghostsEaten += 1
+            scoreboard.update_score(int(pow(200, pacman.ghostsEaten)))
+            obj.die(pacman.ghostsEaten)
 
 
 def soft_reset(ghosts, large_pills, maze, pacman, pills, scoreboard):

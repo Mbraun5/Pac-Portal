@@ -16,6 +16,7 @@ class Settings:
         self.pacIndexes = [0, 1, 2]
         self.deathIndices = [52, 58]
         self.pacSpeed = 3
+        self.resetPacEaten = False
 
         #   Pill Settings
         self.smallPillIndex = 4

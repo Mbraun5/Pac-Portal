@@ -41,6 +41,7 @@ class PacMan:
         self.rect = self.images[0].get_rect()
         self.coordinates = coordinates
         self.set_rect(self.coordinates[0], self.coordinates[1])
+        self.ghostsEaten = 0
 
         self.speed = self.settings.pacSpeed
         self.direction = "right"
@@ -143,6 +144,8 @@ class PacMan:
         self.row_index = self.row_index_orig
         self.column_index = self.column_index_orig
         self.go_left()
+        time.sleep(1.5)
+
 
     def die(self):
         pygame.mixer.stop()
@@ -183,6 +186,9 @@ class PacMan:
             if self.direction == "right" or self.direction == "left":
                 self.rect.x += self.speed
                 if self.mapCounter == 5:
+                    if self.settings.resetPacEaten is True:
+                        self.settings.resetPacEaten = False
+                        self.ghostsEaten = 0
                     self.map[self.row_index][self.column_index] = '.'
                     self.column_index += int(self.speed/abs(self.speed))
                     self.map[self.row_index][self.column_index] = 'P'
