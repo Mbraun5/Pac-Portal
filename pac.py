@@ -144,6 +144,8 @@ class PacMan:
         self.row_index = self.row_index_orig
         self.column_index = self.column_index_orig
         self.go_left()
+        self.blit()
+        pygame.display.flip()
         time.sleep(1.5)
 
 

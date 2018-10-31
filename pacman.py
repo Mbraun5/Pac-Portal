@@ -7,6 +7,7 @@ import pac as p
 import scoreboard as sb
 import ghost as g
 import titleScreen as tS
+import pathfinder
 
 
 def run_game():
@@ -39,6 +40,8 @@ def run_game():
     pacman.set_map(maze.get_map(), maze.rowIndex, maze.columnIndex)
     maze.draw_part_maze()
     scoreboard = sb.ScoreBoard(maze, screen, settings)
+
+    path = pathfinder.Pathfinder(maze.nodes)
 
     timer = 1                       # pacTimer
     timer2 = 0.5                    # pillTimer
