@@ -33,6 +33,7 @@ class PacMan:
         self.blue_portal_column_index = None
         self.orange_portal_row_index = None
         self.orange_portal_column_index = None
+        self.freshPortal = False
 
         self.blitCounter = 0
         self.blitIndex = 1
@@ -65,6 +66,7 @@ class PacMan:
             self.blue_portal_row_index = self.row_index
             self.blue_portal_column_index = self.column_index
             self.blueActive = True
+            self.createBlue = False
 
     def create_orange_portal(self):
         if not self.orangeActive:
@@ -73,11 +75,13 @@ class PacMan:
             self.orange_portal_row_index = self.row_index
             self.orange_portal_column_index = self.column_index
             self.orangeActive = True
+            self.createOrange = False
+            self.freshPortal = True
 
     def check_portal_collisions(self):
-        if self.createBlue and self.createOrange:
-            self.createBlue = False
-            self.createOrange = False
+        if self.freshPortal:
+            self.freshPortal = False
+            return
         if not self.blueActive or not self.orangeActive:
             return
         if self.blueActive and self.orangeActive:
@@ -93,6 +97,7 @@ class PacMan:
                 self.orangeActive = False
                 pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.blueRect)
                 pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.orangeRect)
+                self.updateFlag = [False, "Direction", 999]
             elif pygame.Rect.contains(self.rect, self.orangeRect):
                 self.rect.x = self.blueRect.x
                 self.rect.y = self.blueRect.y
@@ -105,10 +110,17 @@ class PacMan:
                 self.orangeActive = False
                 pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.blueRect)
                 pygame.draw.rect(self.screen, self.settings.get_bg_color(), self.orangeRect)
+                self.updateFlag = [False, "Direction", 999]
 
     def continue_direction(self):
-        self.print_map()
-        self.check_move(self.direction)
+        if self.direction == "left":
+            self.continue_left()
+        elif self.direction == "right":
+            self.continue_right()
+        elif self.direction == "up":
+            self.continue_up()
+        elif self.direction == "down":
+            self.continue_down()
 
     def blit(self):
         if self.blueActive:
@@ -171,25 +183,25 @@ class PacMan:
             if self.direction == "right" or self.direction == "left":
                 self.rect.x += self.speed
                 if self.mapCounter == 5:
+                    self.map[self.row_index][self.column_index] = '.'
+                    self.column_index += int(self.speed/abs(self.speed))
+                    self.map[self.row_index][self.column_index] = 'P'
                     if self.createBlue:
                         self.create_blue_portal()
                     if self.createOrange:
                         self.create_orange_portal()
-                    self.map[self.row_index][self.column_index] = '.'
-                    self.column_index += int(self.speed/abs(self.speed))
-                    self.map[self.row_index][self.column_index] = 'P'
                     self.mapCounter = 0
                 self.travelDistance -= abs(self.speed)
             else:
                 self.rect.y += self.speed
                 if self.mapCounter == 5:
+                    self.map[self.row_index][self.column_index] = '.'
+                    self.row_index += int(self.speed/abs(self.speed))
+                    self.map[self.row_index][self.column_index] = 'P'
                     if self.createBlue:
                         self.create_blue_portal()
                     if self.createOrange:
                         self.create_orange_portal()
-                    self.map[self.row_index][self.column_index] = '.'
-                    self.row_index += int(self.speed/abs(self.speed))
-                    self.map[self.row_index][self.column_index] = 'P'
                     self.mapCounter = 0
                 self.travelDistance -= abs(self.speed)
             if self.updateFlag[0]:
@@ -337,6 +349,38 @@ class PacMan:
             else:
                 self.go_down()
 
+    def continue_left(self):
+        if isinstance(self.map[self.row_index][self.column_index - 1], pygame.Rect) or \
+                isinstance(self.map[self.row_index + 1][self.column_index - 1], pygame.Rect) or \
+                isinstance(self.map[self.row_index + 2][self.column_index - 1], pygame.Rect):
+            self.moving = False
+        else:
+            self.go_left()
+
+    def continue_right(self):
+        if isinstance(self.map[self.row_index][self.column_index + 3], pygame.Rect) or \
+                isinstance(self.map[self.row_index + 1][self.column_index + 3], pygame.Rect) or \
+                isinstance(self.map[self.row_index + 2][self.column_index + 3], pygame.Rect):
+            self.moving = False
+        else:
+            self.go_right()
+
+    def continue_up(self):
+        if isinstance(self.map[self.row_index - 1][self.column_index], pygame.Rect) or \
+                isinstance(self.map[self.row_index - 1][self.column_index + 1], pygame.Rect) or \
+                isinstance(self.map[self.row_index - 1][self.column_index + 2], pygame.Rect):
+            self.moving = False
+        else:
+            self.go_up()
+
+    def continue_down(self):
+        if isinstance(self.map[self.row_index + 3][self.column_index], pygame.Rect) or \
+                isinstance(self.map[self.row_index + 3][self.column_index + 1], pygame.Rect) or \
+                isinstance(self.map[self.row_index + 3][self.column_index + 2], pygame.Rect):
+            self.moving = False
+        else:
+            self.go_down()
+
     def go_left(self):
         if isinstance(self.map[self.row_index][self.column_index - 1], pygame.Rect) or \
                 isinstance(self.map[self.row_index + 1][self.column_index - 1], pygame.Rect) or \
@@ -356,7 +400,6 @@ class PacMan:
                 self.images[index] = pygame.transform.rotate(image, 270)
             self.speed *= -1
         self.direction = "left"
-
         count = 0
         while not isinstance(self.map[self.row_index][self.column_index - count], pygame.Rect):
             count += 1
@@ -413,6 +456,10 @@ class PacMan:
         self.travelDistance = self.rect.top - self.map[self.row_index - count][self.column_index].bottom
 
     def go_down(self):
+        if isinstance(self.map[self.row_index + 1][self.column_index], pygame.Rect) or \
+                isinstance(self.map[self.row_index + 1][self.column_index + 1], pygame.Rect) or \
+                isinstance(self.map[self.row_index + 1][self.column_index + 2], pygame.Rect):
+            return
         self.mapCounter = 0
         self.moving = True
         if self.direction == "up":

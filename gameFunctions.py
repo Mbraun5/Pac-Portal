@@ -62,6 +62,8 @@ def check_key_down_events(event, pacman):
         pacman.set_blue_portal()
     elif event.key == pygame.K_s:
         pacman.set_orange_portal()
+    elif event.key == pygame.K_z:
+        pacman.print_map()
 
 
 def check_events(pacman):

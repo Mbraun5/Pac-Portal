@@ -50,7 +50,7 @@ class Ghost:
 
     def set_vulnerable(self):
         self.vulnerable = True
-        self.vulnerableTimer = 5
+        self.vulnerableTimer = 10
         self.delta_t = 0
 
 
