@@ -61,6 +61,7 @@ def run_game():
         for pill in large_pills:
             pill.blit()
         for ghost in ghosts:
+            #   Comment ghost.update out for game to run without ghosts updating.
             ghost.update()
             ghost.blit()
         pacman.blit()
