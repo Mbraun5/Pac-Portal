@@ -7,7 +7,6 @@ import pac as p
 import scoreboard as sb
 import ghost as g
 import titleScreen as tS
-import pathfinder
 
 
 def run_game():
@@ -44,8 +43,6 @@ def run_game():
     maze.draw_part_maze()
     scoreboard = sb.ScoreBoard(maze, screen, settings)
 
-    path = pathfinder.Pathfinder(maze.nodes)
-
     timer = 1                       # pacTimer
     timer2 = 0.5                    # pillTimer
     timer3 = 1.5                    # ghostTimer
@@ -64,6 +61,7 @@ def run_game():
         for pill in large_pills:
             pill.blit()
         for ghost in ghosts:
+            ghost.update()
             ghost.blit()
         pacman.blit()
         pygame.display.flip()

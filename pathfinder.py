@@ -23,8 +23,6 @@ class Pathfinder:
                          60: [59, 61, 50], 61: [60, 65], 62: [52, 63], 63: [62, 64, 56], 64: [63, 65, 57],
                          65: [64, 61]}
         self.origDict = self.create_orig_dict()
-        test = self.find_fastest_path(0, 65)
-        print(test)
 
     def create_orig_dict(self):
         orig_dict = {}
@@ -34,6 +32,7 @@ class Pathfinder:
         return orig_dict
 
     def find_fastest_path(self, a, b):
+        self.origDict = self.create_orig_dict()
         alg_dict = self.origDict.copy()
         smallest_index = a
         visit_list = [a]

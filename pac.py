@@ -148,7 +148,6 @@ class PacMan:
         pygame.display.flip()
         time.sleep(1.5)
 
-
     def die(self):
         pygame.mixer.stop()
         pygame.mixer.Sound.play(self.death_sound)

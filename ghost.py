@@ -1,6 +1,7 @@
 import pygame
 import time
 import pathfinder
+import random
 
 
 class Ghost:
@@ -40,6 +41,8 @@ class Ghost:
         self.rectList = [self.twoRect, self.fourRect, self.eightRect, self.sixteenRect]
 
         self.direction = "Up"
+        self.moving = False
+        self.pathIndex = 0
 
         self.dx = 3
         self.dy = 3
@@ -51,6 +54,32 @@ class Ghost:
             self.screen.blit(self.vulnerable_image_lib[self.vulnerableIndex], self.rect)
         else:
             self.screen.blit(self.vulnerable_white_lib[self.vulnerableIndex], self.rect)
+
+    def update(self):
+        if self.moving:
+            if pygame.Rect.contains(self.rect, self.nodes[self.path[self.pathIndex]]):
+                self.pathIndex += 1
+                if self.pathIndex >= len(self.path):
+                    self.find_new_path()
+                if self.rect.x > self.nodes[self.path[self.pathIndex]].x:
+                    self.change_direction("Left")
+                elif self.rect.x < self.nodes[self.path[self.pathIndex]].x:
+                    self.change_direction("Right")
+                elif self.rect.y > self.nodes[self.path[self.pathIndex]].y:
+                    self.change_direction("Up")
+                elif self.rect.y < self.nodes[self.path[self.pathIndex]].y:
+                    self.change_direction("Down")
+            if self.direction == "Up":
+                self.rect.y -= self.dy
+            elif self.direction == "Right":
+                self.rect.x += self.dx
+            elif self.direction == "Left":
+                self.rect.x -= self.dx
+            elif self.direction == "Down":
+                self.rect.y += self.dy
+
+    def find_new_path(self):
+        pass
 
     def reset(self):
         self.rect.x = self.coordinates[0]
@@ -125,6 +154,19 @@ class Blinky(Ghost):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.moving = True
+        self.pathIndex = 0
+        self.path = [24]
+
+    def find_new_path(self):
+        new_place = random.randint(1, 63)
+        while new_place == self.path[self.pathIndex - 1]:
+            new_place = random.randint(1, 63)
+        self.path = self.pathfinder.find_fastest_path(self.path[self.pathIndex - 1], new_place)
+        self.pathIndex = 0
+        self.path.pop(0)
+        print(self.path)
+        print(new_place)
 
 
 class Clyde(Ghost):
